@@ -13,7 +13,7 @@ public class InsertionSort implements SortInterface {
 	@Override
 	public void sort() {
 		CommonUtils.printArray(sourceArray);
-		System.out.println("\n\n");
+		System.out.println("\n");
 		int count = 0;
 		
 		for (int i = 1, j = sourceArray.length; i < j; i++) {

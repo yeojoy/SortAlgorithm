@@ -13,7 +13,7 @@ public class BubbleSort implements SortInterface {
 	@Override
 	public void sort() {
 		CommonUtils.printArray(sourceArray);
-		System.out.println("\n\n");
+		System.out.println("\n");
 		
 		int count = 0;
 		

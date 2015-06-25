@@ -13,6 +13,7 @@ public class SelectionSort implements SortInterface {
 	@Override
 	public void sort() {
 		CommonUtils.printArray(sourceArray);
+		System.out.println("\n");
 		
 		int count = 0;
 		
