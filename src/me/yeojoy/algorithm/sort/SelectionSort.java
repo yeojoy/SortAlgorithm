@@ -1,5 +1,7 @@
 package me.yeojoy.algorithm.sort;
 
+import me.yeojoy.algorithm.util.CommonUtils;
+
 public class SelectionSort implements SortInterface {
 
 	private int[] sourceArray;
@@ -12,11 +14,14 @@ public class SelectionSort implements SortInterface {
 	public void sort() {
 		CommonUtils.printArray(sourceArray);
 		
+		int count = 0;
+		
 		for (int i = 0, j = sourceArray.length; i < j; i++) {
 			
 			int maxValueIndex = 0;
 			
 			for (int k = 1, l = (j - i); k < l; k++) {
+				count++;
 				if (sourceArray[maxValueIndex] < sourceArray[k]) {
 					maxValueIndex = k;
 				}
@@ -28,14 +33,7 @@ public class SelectionSort implements SortInterface {
 			
 		}
 		
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		CommonUtils.printArray(sourceArray);
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		
+		CommonUtils.validateArray(sourceArray, count);
 	}
 	
 	private void swap(int i, int j, int[] array) {

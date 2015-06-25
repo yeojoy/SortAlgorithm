@@ -2,11 +2,11 @@ package me.yeojoy.algorithm.sort;
 
 import me.yeojoy.algorithm.util.CommonUtils;
 
-public class BubbleSort implements SortInterface {
+public class InsertionSort implements SortInterface {
 
 	private int[] sourceArray;
 	
-	public BubbleSort(int[] array) {
+	public InsertionSort(int[] array) {
 		sourceArray = array;
 	}
 	
@@ -14,31 +14,22 @@ public class BubbleSort implements SortInterface {
 	public void sort() {
 		CommonUtils.printArray(sourceArray);
 		System.out.println("\n\n");
-		
 		int count = 0;
 		
-		int swapCallCount;
-		for (int i = 0, j = sourceArray.length; i < j; i++) {
-			swapCallCount = 0;
-						
-			for (int k = 0, l = (j - i - 1); k < l; k++) {
+		for (int i = 1, j = sourceArray.length; i < j; i++) {
+			for (int k = i; k > 0; k--) {
 				count++;
-				if (sourceArray[k] > sourceArray[k + 1]) {
-					
-					swap(k, k + 1, sourceArray);
-					
-					swapCallCount++;
-				}
+				if (sourceArray[k - 1] > sourceArray[k]) {
+					swap(k - 1, k, sourceArray);
+				} else
+					break;
 			}
-			
+
 			CommonUtils.printArray(sourceArray);
-			
-			if (swapCallCount == 0) {
-				break;
-			}
 		}
 		
 		CommonUtils.validateArray(sourceArray, count);
+		
 	}
 	
 	private void swap(int i, int j, int[] array) {
