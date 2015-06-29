@@ -2,9 +2,7 @@ package me.yeojoy.algorithm;
 
 import java.util.Random;
 
-import me.yeojoy.algorithm.sort.BubbleSort;
-import me.yeojoy.algorithm.sort.InsertionSort;
-import me.yeojoy.algorithm.sort.SelectionSort;
+import me.yeojoy.algorithm.sort.QuickSort;
 import me.yeojoy.algorithm.sort.SortInterface;
 
 public class SortAlgorithmTestDrive {
@@ -37,9 +35,21 @@ public class SortAlgorithmTestDrive {
 	
 	private void run() {
 		
+		// Quick 정렬
+		System.out.println("Quick정렬 - 랜덤");
+//		SortInterface sort = new QuickSort(sourceArray1.clone());
+		SortInterface sort = new QuickSort(new int[] { 8, 11, 5, 1, 9, 15, 3, 2, 7});
+		sort.sort();
+		/*
+		System.out.println("Quick정렬 - 순차");
+		sort = new QuickSort(sourceArray2.clone());
+		sort.sort();
+		System.out.println("Quick정렬 - 역순차");
+		sort = new QuickSort(sourceArray3.clone());
+		sort.sort();
 		// 삽입 정렬
 		System.out.println("삽입정렬 - 랜덤");
-		SortInterface sort = new InsertionSort(sourceArray1.clone());
+		sort = new InsertionSort(sourceArray1.clone());
 		sort.sort();
 		System.out.println("삽입정렬 - 순차");
 		sort = new InsertionSort(sourceArray2.clone());
@@ -69,6 +79,6 @@ public class SortAlgorithmTestDrive {
 		System.out.println("선택정렬 - 역순차");
 		sort = new SelectionSort(sourceArray3.clone());
 		sort.sort();
-		
+		*/
 	}
 }
