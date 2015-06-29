@@ -32,25 +32,50 @@ public class QuickSort implements SortInterface {
 		System.out.println(String.format("Left, Pivot, Right : %d, %d, %d. Pivot : %d", left, pivotIndex, right, pivot));
 		
 		while (i <= j) {
-			while (array[i] < pivot)
+			while (array[i] < pivot) {
+				if (i > j) {
+					break;
+				}
+				
 				i++;
+				if (i == pivotIndex && i < (right - 1)) i++;
+
+				
+			}
 			
-			while (pivot < array[j])
+			while (pivot < array[j] && i <= j) {
+				if (i > j) break;
+				
 				j--;
+				if (j == pivotIndex && j > (left + 1)) j--;
+				
+			}
 			
 			if (i <= j) {
 				swap(i, j, array);
 				i++;
+				if (i == pivotIndex && i < (right - 1)) i++;
 				j--;
+				if (j == pivotIndex && j > (left + 1)) j--;
 				
+				CommonUtils.printArray(array);
+			} else {
+				if (pivotIndex > i) {
+					swap(pivotIndex, i + 1, array);
+					pivotIndex = i + 1;
+				} else {					
+					swap(pivotIndex, i - 1, array);
+					pivotIndex = i - 1;
+				}
+				System.out.println("Changed Pivot Index : " + pivotIndex);
 				CommonUtils.printArray(array);
 			}
 		}
 		
-		if (left < j)
-			quickSort(left, j, array);
-		if (i < right)
-			quickSort(i, right, array);
+		if (left < pivotIndex)
+			quickSort(left, pivotIndex - 1, array);
+		if (pivotIndex < right)
+			quickSort(pivotIndex + 1, right, array);
 		
 	}	
 	
