@@ -37,8 +37,9 @@ public class SortAlgorithmTestDrive {
 		
 		// Quick 정렬
 		System.out.println("Quick정렬 - 랜덤");
-//		SortInterface sort = new QuickSort(sourceArray1.clone());
-		SortInterface sort = new QuickSort(new int[] { 8, 11, 5, 1, 9, 15, 3, 2, 7});
+		SortInterface sort = new QuickSort(sourceArray1.clone());
+//		SortInterface sort = new QuickSort(new int[] { 8, 11, 5, 1, 9, 15, 3, 2, 7});
+//		SortInterface sort = new QuickSort(new int[] { 724, 427, 565, 293, 964, 260, 764, 643, 285, 140, 519, 410, 974, 424, 432});
 		sort.sort();
 		/*
 		System.out.println("Quick정렬 - 순차");

@@ -1,5 +1,6 @@
 package me.yeojoy.algorithm.sort;
 
+import java.util.HashMap;
 import java.util.Random;
 
 import me.yeojoy.algorithm.util.CommonUtils;
@@ -7,6 +8,8 @@ import me.yeojoy.algorithm.util.CommonUtils;
 public class QuickSort implements SortInterface {
 
 	private int[] sourceArray;
+	
+	private HashMap<Integer, Integer> alreadySorted = new HashMap<Integer, Integer>();
 	
 	public QuickSort(int[] array) {
 		sourceArray = array;
@@ -31,45 +34,79 @@ public class QuickSort implements SortInterface {
 		System.out.println();
 		System.out.println(String.format("Left, Pivot, Right : %d, %d, %d. Pivot : %d", left, pivotIndex, right, pivot));
 		
-		while (i <= j) {
+		while (i < j) {
+			// 왼쪽에서 부터 큰수 검색
 			while (array[i] < pivot) {
-				if (i > j) {
+				i++;
+				// pivot위치이면 이동
+				if (i == pivotIndex && i < right) i++;
+				
+				// j를 넘어가면 멈춤
+				if (i >= j) {
+					// right을 넘어가면 right을 i에 넣어줌
+					if (i > right) i = right;
 					break;
 				}
 				
-				i++;
-				if (i == pivotIndex && i < (right - 1)) i++;
-
-				
 			}
 			
-			while (pivot < array[j] && i <= j) {
-				if (i > j) break;
-				
+			// 오른쪽에서 부터 작은 수 검색
+			while (pivot < array[j]) {
 				j--;
-				if (j == pivotIndex && j > (left + 1)) j--;
 				
-			}
-			
-			if (i <= j) {
-				swap(i, j, array);
-				i++;
-				if (i == pivotIndex && i < (right - 1)) i++;
-				j--;
-				if (j == pivotIndex && j > (left + 1)) j--;
+				// pivot 위치에 가면 한 칸 더 이동
+				if (j == pivotIndex && j > left) j--;
 				
-				CommonUtils.printArray(array);
-			} else {
-				if (pivotIndex > i) {
-					swap(pivotIndex, i + 1, array);
-					pivotIndex = i + 1;
-				} else {					
-					swap(pivotIndex, i - 1, array);
-					pivotIndex = i - 1;
+				// i를 넘어가면 멈춤
+				if (i >= j) {
+					// left를 넘어가면 left를 j에 넣어줌
+					if (j < left) j = left;
+					break;
 				}
-				System.out.println("Changed Pivot Index : " + pivotIndex);
-				CommonUtils.printArray(array);
 			}
+			
+			// array[i]와 array[j]위치가 바꿔야할 위치(i < j)일 때 변경해 주
+			if (i < j) {
+				swap(i, j, array);
+				
+				// swap을 하고 다시 한 칸씩 이동시켜 줌.
+				i++;
+				j--;
+				// pivot을 지난다면 한칸씩 더 움직임
+				if (i == pivotIndex && i < (right - 1)) i++;
+				if (j == pivotIndex && j > (left + 1)) j--;
+				
+			} 
+			
+			// 
+			if (i >= j){
+				if (array[pivotIndex] > array[i]) {
+					if ((i + 1) >= right) {
+						swap(pivotIndex, i, array);
+						pivotIndex = i;
+					} else {
+						swap(pivotIndex, i, array);
+						pivotIndex = i;
+					}
+				} else {					
+					if ((i - 1) < left) {
+						swap(pivotIndex, i, array);
+						pivotIndex = i;
+						
+					} else {
+						swap(pivotIndex, i - 1, array);
+						pivotIndex = i - 1;
+						
+					}
+					
+					
+				}
+				System.out.println();
+				System.out.println("Changed Pivot Index : " + pivotIndex);
+				alreadySorted.put(pivotIndex, array[pivotIndex]);
+			} 
+			
+			CommonUtils.printArray(array);
 		}
 		
 		if (left < pivotIndex)
@@ -81,11 +118,11 @@ public class QuickSort implements SortInterface {
 	
 	private void swap(int i, int j, int[] array) {
 		
+		System.out.println();
 		System.out.println(array[i] + "와(과) " + array[j] + "을(를) 변경.");
 		System.out.println();
 		int temp = array[i];
 		array[i] = array[j];
 		array[j] = temp;
-	}
-
+	}	
 }
